@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Forms</title>
+  </head>
+  <body>
+    <!-- form element -->
+    <h2>form element</h2>
+    <form>this is a form element</form>
+
+    <hr />
+
+    <!-- form with input elements -->
+    <h2>form with input elements</h2>
+    <form>
+      <input type="text" placeholder="Enter username" />
+      <input type="password" placeholder="Enter password" />
+      <input type="text" placeholder="Enter age" />
+      <input type="date" />
+    </form>
+
+    <hr />
+
+    <!-- form with inputs and labels -->
+    <h2>form with inputs and labels</h2>
+    <form>
+      <label for="username">Username:</label>
+      <input type="text" placeholder="Enter username" id="username" />
+      <label for="password">Password:</label>
+      <input type="password" placeholder="Enter password" id="password" />
+      <label for="age">Password:</label>
+      <input type="text" placeholder="Enter age" id="age" />
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" />
+    </form>
+
+    <hr />
+
+    <!-- form with submit button -->
+    <h2>form with submit button</h2>
+    <form>
+      <div>
+        <label for="username">Username:</label>
+        <input type="text" placeholder="Enter username" id="username" />
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" placeholder="Enter password" id="password" />
+      </div>
+      <div>
+        <label for="age">Age:</label>
+        <input type="text" placeholder="Enter age" id="age" />
+      </div>
+      <div>
+        <label for="dob">Date of Joining:</label>
+        <input type="date" id="dob" />
+      </div>
+      <div>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+
+    <hr />
+
+    <!-- form with submit action and method -->
+    <h2>form with submit action and method</h2>
+    <form action="/create-user" method="get">
+      <div>
+        <label for="username">Username:</label>
+        <input
+          name="user-name"
+          type="text"
+          placeholder="Enter username"
+          id="username"
+        />
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input
+          name="password"
+          type="password"
+          placeholder="Enter password"
+          id="password"
+        />
+      </div>
+      <div>
+        <label for="age">Age:</label>
+        <input name="user-age" type="text" placeholder="Enter age" id="age" />
+      </div>
+      <div>
+        <label for="dob">Date of Joining:</label>
+        <input name="user-dob" type="date" id="dob" />
+      </div>
+      <div>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </body>
+</html>
