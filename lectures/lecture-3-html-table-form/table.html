@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semantic HTML Tables with Spanning</title>
+    <style>
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        padding: 40px;
+        background-color: #f9fafb;
+        color: #1f2937;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      h1,
+      h2 {
+        color: #111827;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        margin-bottom: 50px;
+        background-color: #ffffff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      th,
+      td {
+        padding: 12px 16px;
+        text-align: left;
+        border: 1px solid #e5e7eb; /* Visible borders to clearly trace cell spanning */
+      }
+      thead {
+        background-color: #111827;
+      }
+      thead th {
+        color: #ffffff;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+      }
+      tbody tr:nth-child(even) {
+        background-color: #f3f4f6;
+      }
+      tfoot {
+        background-color: #f9fafb;
+        font-weight: bold;
+        background-color: #f3f4f6;
+      }
+      .status-up {
+        color: #059669;
+        font-weight: 600;
+      }
+      .status-down {
+        color: #dc2626;
+        font-weight: 600;
+      }
+
+      /* Highlight cell spanning boxes for visual clarity */
+      .spanned-cell {
+        background-color: #eff6ff !important;
+        color: #1d4ed8;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Table 1: Cloud Infrastructure Node Logs</h1>
+    <p>
+      A 10-row, 5-column grid tracking global web cluster vitals using standard
+      semantic structural elements.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Node ID</th>
+          <th>Region</th>
+          <th>CPU Load</th>
+          <th>Memory Usage</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>us-east-01</td>
+          <td>N. Virginia</td>
+          <td>42%</td>
+          <td>5.4 GB</td>
+          <td><span class="status-up">Online</span></td>
+        </tr>
+        <tr>
+          <td>us-east-02</td>
+          <td>N. Virginia</td>
+          <td>89%</td>
+          <td>14.1 GB</td>
+          <td><span class="status-up">Online</span></td>
+        </tr>
+        <tr>
+          <td>us-west-01</td>
+          <td>Oregon</td>
+          <td>12%</td>
+          <td>2.1 GB</td>
+          <td><span class="status-up">Online</span></td>
+        </tr>
+        <tr>
+          <td>eu-west-01</td>
+          <td>Ireland</td>
+          <td>0%</td>
+          <td>0.0 GB</td>
+          <td><span class="status-down">Offline</span></td>
+        </tr>
+        <tr>
+          <td>eu-central-01</td>
+          <td>Frankfurt</td>
+          <td>55%</td>
+          <td>8.9 GB</td>
+          <td><span class="status-up">Online</span></td>
+        </tr>
+        <tr>
+          <td>ap-south-01</td>
+          <td>Mumbai</td>
+          <td>73%</td>
+          <td>11.2 GB</td>
+          <td><span class="status-up">Online</span></td>
+        </tr>
+        <tr>
+          <td>ap-northeast-01</td>
+          <td>Tokyo</td>
+          <td>31%</td>
+          <td>4.7 GB</td>
+          <td><span class="status-up">Online</span></td>
+        </tr>
+        <tr>
+          <td>sa-east-01</td>
+          <td>São Paulo</td>
+          <td>95%</td>
+          <td>15.8 GB</td>
+          <td><span class="status-up">Online</span></td>
+        </tr>
+        <tr>
+          <td>af-south-01</td>
+          <td>Cape Town</td>
+          <td>22%</td>
+          <td>3.9 GB</td>
+          <td><span class="status-up">Online</span></td>
+        </tr>
+        <tr>
+          <td>me-central-01</td>
+          <td>UAE</td>
+          <td>61%</td>
+          <td>9.2 GB</td>
+          <td><span class="status-up">Online</span></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <!-- colspan="2" merges the first two cells horizontally -->
+          <td colspan="2" class="spanned-cell">
+            System Cluster Totals (Horizontal Span)
+          </td>
+          <td>Avg: 48%</td>
+          <td>Total: 75.3 GB</td>
+          <td>9 / 10 Active</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <hr style="border: 0; border-top: 1px dashed #ccc; margin: 40px 0" />
+
+    <h2>Table 2: Developer Shift Schedule (Cell Spanning Demo)</h2>
+    <p>
+      This grid illustrates both vertical spanning (<code>rowspan</code>) and
+      horizontal spanning (<code>colspan</code>).
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Department</th>
+          <th>Team Member</th>
+          <th>Shift Focus</th>
+          <th>Mon-Wed Schedule</th>
+          <th>Thu-Fri Schedule</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <!-- rowspan="3" merges this department cell vertically across the next 3 rows -->
+          <td rowspan="3" class="spanned-cell">
+            Core Infrastructure (Vertical Span)
+          </td>
+          <td>Aarav Sharma</td>
+          <td>Database Scaling</td>
+          <td>08:00 - 16:00</td>
+          <td>08:00 - 16:00</td>
+        </tr>
+        <tr>
+          <!-- Note: The first cell is omitted here because the row above spans down into this space -->
+          <td>Ananya Iyer</td>
+          <td>Security Patching</td>
+          <td>16:00 - 00:00</td>
+          <td>16:00 - 00:00</td>
+        </tr>
+        <tr>
+          <!-- Note: The first cell is omitted here as well -->
+          <td>Rohan Das</td>
+          <td>Backup Systems</td>
+          <!-- colspan="2" merges the shift slots horizontally across both calendar blocks -->
+          <td colspan="2" class="spanned-cell">
+            On-Call Support 24/7 (Horizontal Span)
+          </td>
+        </tr>
+        <tr>
+          <!-- New department starts normal row mapping -->
+          <td>Site Reliability</td>
+          <td>Lisa Wang</td>
+          <td>Load Balancing</td>
+          <td>08:00 - 16:00</td>
+          <td>12:00 - 20:00</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
