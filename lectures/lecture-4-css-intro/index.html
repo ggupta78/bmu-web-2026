@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Intro</title>
+
+    <!-- local to file style tag -->
+    <style>
+      h2 {
+        color: blue;
+        font-weight: 800;
+        background-color: aquamarine;
+      }
+    </style>
+
+    <!-- External CSS file (Best practice) -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Inline style -->
+    <h1 style="color: green; text-align: center">
+      CSS Intro and Examples (inline style)
+    </h1>
+
+    <h2>This is an h2 heading (using local style tag or style.css)</h2>
+    <h2 id="second-h2">
+      This is another h2 heading (using local style tag or style.css)
+    </h2>
+
+    <h3>This is an h3 heading (using inherited style)</h3>
+  </body>
+</html>

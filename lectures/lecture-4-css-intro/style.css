@@ -1,0 +1,15 @@
+h1 {
+  color: cornflowerblue;
+  /* Not recommended */
+  /* color: cornflowerblue !important;  */
+}
+
+/* id selector */
+/* #second-h2 {
+  color: crimson;
+} */
+
+h2 {
+  color: orange;
+  font-weight: 100;
+}
