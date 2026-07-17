@@ -1,0 +1,45 @@
+* {
+  background-color: beige;
+}
+
+/* Better way to do the above */
+/* body {
+  background-color: beige;
+} */
+
+header {
+  text-align: center;
+}
+
+#header-desc {
+  font-style: italic;
+}
+
+.desc-head {
+  font-style: normal;
+}
+
+h1 {
+  color: darkslateblue;
+}
+
+h2 {
+  color: darkgreen;
+}
+
+p {
+  font-family: "Lucida Sans", "Lucida Sans Regular", sans-serif;
+  font-size: 1.25rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+.post-links {
+  color: purple;
+}
+
+.post-links:hover {
+  color: red;
+}
