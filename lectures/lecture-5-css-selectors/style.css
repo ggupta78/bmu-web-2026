@@ -11,12 +11,14 @@ header {
   text-align: center;
 }
 
+/* Id selector is more specific than the .header-desc class selector below */
 #header-desc {
   font-style: italic;
 }
 
-.desc-head {
+.header-desc {
   font-style: normal;
+  /* font-style: normal !important; */
 }
 
 h1 {
@@ -40,6 +42,52 @@ a {
   color: purple;
 }
 
+/* pseudo class selector */
 .post-links:hover {
   color: red;
+}
+
+/* Subscribe Section */
+/* Targets only input tags that have type="password" */
+.subscribe input[type="text"] {
+  background-color: aliceblue;
+  color: green;
+}
+
+/* pseudo element selector */
+.subscribe input[type="text"]::placeholder {
+  color: rgb(205, 169, 205);
+}
+
+.subscribe button {
+  background-color: darkolivegreen;
+  color: white;
+}
+
+/* pseudo class selector */
+.subscribe button:active {
+  background-color: lightgreen;
+  color: black;
+}
+
+/* Footer section */
+/* Descendant selector */
+footer p {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 1rem;
+}
+/* Direct Descendant selector */
+footer > div > p {
+  font-family: cursive;
+  font-size: 1rem;
+}
+
+/* Targets links containing 'linkedin' */
+a[href*="linkedin"] {
+  color: teal;
+}
+
+/* pseudo element selector */
+::selection {
+  background-color: bisque;
 }
