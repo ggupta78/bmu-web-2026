@@ -16,6 +16,7 @@
   border-color: darkblue;
   border-style: dashed;
   margin: 60px 40px; /* top and bottom | left and right */
+  border-radius: 10px;
 }
 
 #three {
