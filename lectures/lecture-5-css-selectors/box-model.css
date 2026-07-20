@@ -12,9 +12,7 @@
   width: 400px;
   height: 400px;
   padding: 20px 20px 20px 20px; /* top right bottom left */
-  border-width: 20px;
-  border-color: darkblue;
-  border-style: dashed;
+  border: 20px dashed darkblue; /* single-line shorthand format */
   margin: 60px 40px; /* top and bottom | left and right */
   border-radius: 10px;
 }
