@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Non-Semantic HTML Demo (Div-Based)</title>
+
+    <!-- CSS (Same visual presentation, updated selectors to target divs) -->
+    <style>
+      /* Base reset and page layout */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        line-height: 1.6;
+        color: #2b2d42;
+        background-color: #f8f9fa;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      /* Formerly <header> styling */
+      .header {
+        background-color: #1d3557;
+        color: white;
+        padding: 1.5rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      /* Formerly <nav> styling */
+      .nav ul {
+        display: flex;
+        gap: 1.5rem;
+        list-style: none;
+      }
+
+      .nav a {
+        color: #f1faee;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .nav a:hover {
+        text-decoration: underline;
+      }
+
+      /* Structural container layout */
+      .layout-wrapper {
+        display: flex;
+        flex: 1;
+        max-width: 1100px;
+        margin: 2rem auto;
+        gap: 2rem;
+        padding: 0 1rem;
+      }
+
+      /* Formerly <main> styling */
+      .main {
+        flex: 3;
+      }
+
+      /* Formerly <article> styling */
+      .article {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        margin-bottom: 1.5rem;
+      }
+
+      .article h2 {
+        color: #1d3557;
+        margin-bottom: 0.5rem;
+      }
+
+      /* Formerly <time> styling */
+      .time {
+        font-size: 0.875rem;
+        color: #6c757d;
+        display: block;
+        margin-bottom: 1rem;
+      }
+
+      /* Formerly <section> styling */
+      .section {
+        margin-top: 1rem;
+      }
+
+      /* Formerly <aside> styling */
+      .aside {
+        flex: 1;
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        height: fit-content;
+      }
+
+      .aside h3 {
+        margin-bottom: 0.75rem;
+        color: #1d3557;
+      }
+
+      /* Formerly <footer> styling */
+      .footer {
+        background-color: #1d3557;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+        margin-top: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Generic div wrapper replacing <header> -->
+    <div class="header">
+      <h1>DevBlog</h1>
+      <!-- Generic div replacing <nav> -->
+      <div class="nav">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#articles">Articles</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper">
+      <!-- Generic div replacing <main> -->
+      <div class="main">
+        <!-- Generic div replacing <article> -->
+        <div class="article" id="articles">
+          <h2>Why Semantic HTML Matters</h2>
+          <!-- Generic span replacing <time> -->
+          <span class="time">August 4, 2026</span>
+
+          <p>
+            Semantic HTML tags clearly describe their meaning to both the
+            browser and the developer. Instead of relying purely on generic
+            <code>&lt;div&gt;</code> tags, semantic elements give context to web
+            pages.
+          </p>
+
+          <!-- Generic div replacing <section> -->
+          <div class="section">
+            <h3>Key Benefits:</h3>
+            <ul>
+              <li>
+                <strong>Accessibility:</strong> Screen readers use tags like
+                <code>&lt;nav&gt;</code> and <code>&lt;main&gt;</code> to help
+                users navigate easily.
+              </li>
+              <li>
+                <strong>SEO:</strong> Search engine crawlers prioritize keywords
+                inside meaningful tags.
+              </li>
+              <li>
+                <strong>Maintainability:</strong> Clean markup is significantly
+                easier for developers to read and debug.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Generic div replacing <aside> -->
+      <div class="aside">
+        <h3>About the Author</h3>
+        <p>
+          Alex is a front-end developer passionate about clean code, web
+          performance, and digital accessibility.
+        </p>
+      </div>
+    </div>
+
+    <!-- Generic div replacing <footer> -->
+    <div class="footer">
+      <p>&copy; 2026 DevBlog. Built with Divs (Non-Semantic).</p>
+    </div>
+  </body>
+</html>
