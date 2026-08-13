@@ -16,7 +16,7 @@ article {
   padding: 10px;
   margin: 10px;
   background: aqua;
-  width: 100px;
+  width: 200px;
   height: 200px;
 }
 /* Add your flexbox CSS below here */
@@ -26,4 +26,13 @@ section {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+article:nth-of-type(5) {
+  /* flex-grow: 1; */
+  /* flex-shrink: 1; */
+}
+article:nth-of-type(6) {
+  /* flex-grow: 2; */
+  /* flex-shrink: 2; */
 }
