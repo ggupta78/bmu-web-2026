@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Flexbox Layout with Hamburger</title>
+    <link rel="stylesheet" href="sample.css" />
+  </head>
+  <body>
+    <!-- 1. Hidden Checkbox for Menu Toggle -->
+    <input type="checkbox" id="menu-toggle" class="menu-checkbox" />
+
+    <!-- 2. Top Navigation Bar -->
+    <header class="top-nav">
+      <div class="nav-left">
+        <!-- Hamburger Icon (linked to checkbox via 'for' attribute) -->
+        <label for="menu-toggle" class="hamburger-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+        <div class="logo">BrandLogo</div>
+      </div>
+      <nav class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Profile</a>
+      </nav>
+    </header>
+
+    <!-- 3. Main Body Container -->
+    <div class="main-wrapper">
+      <!-- Side Menu -->
+      <aside class="side-menu">
+        <ul>
+          <li><a href="#" class="active">Dashboard</a></li>
+          <li><a href="#">Analytics</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Settings</a></li>
+          <li><a href="#">Help</a></li>
+        </ul>
+      </aside>
+
+      <!-- Main Content Section -->
+      <main class="content-section">
+        <h1>Main Content Area</h1>
+        <p>
+          On mobile, tap the hamburger icon in the top left to slide the sidebar
+          menu open and closed seamlessly.
+        </p>
+        <div class="card-grid">
+          <div class="card">Card 1</div>
+          <div class="card">Card 2</div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

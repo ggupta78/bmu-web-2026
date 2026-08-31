@@ -30,7 +30,7 @@ section {
 
 article:nth-of-type(5) {
   /* flex-grow: 1; */
-  /* flex-shrink: 1; */
+  /* flex-shrink: 3; */
 }
 article:nth-of-type(6) {
   /* flex-grow: 2; */

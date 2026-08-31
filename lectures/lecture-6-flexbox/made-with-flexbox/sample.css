@@ -1,0 +1,174 @@
+/* 1. Reset and Core Layout Setup */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #f4f6f9;
+}
+
+/* 2. Hidden Checkbox Functional Rule */
+.menu-checkbox {
+  display: none;
+}
+
+/* 3. Top Navigation Bar */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e293b;
+  color: #ffffff;
+  padding: 0 20px;
+  height: 60px;
+  flex-shrink: 0;
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.top-nav .logo {
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.nav-links a {
+  color: #cbd5e1;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 0.95rem;
+}
+
+/* 4. Desktop Hamburger Icon Styles (Hidden by default) */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.hamburger-btn span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 2px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* 5. Main Wrapper Layout */
+.main-wrapper {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 6. Side Menu (Desktop) */
+.side-menu {
+  width: 240px;
+  background-color: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  flex-shrink: 0;
+  padding-top: 20px;
+  transition: transform 0.3s ease; /* Prepare for mobile transitions */
+}
+
+.side-menu ul {
+  list-style: none;
+}
+
+.side-menu ul li a {
+  display: block;
+  padding: 12px 24px;
+  color: #64748b;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.side-menu ul li a.active {
+  color: #2563eb;
+  background-color: #eff6ff;
+  border-left: 4px solid #2563eb;
+  padding-left: 20px;
+}
+
+/* 7. Content Section */
+.content-section {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.card-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1;
+  min-width: 250px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+/* ==========================================================================
+   8. Media Query for Responsive Mobile Views (Under 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Reveal the hamburger trigger button on mobile */
+  .hamburger-btn {
+    display: flex;
+  }
+
+  /* Shift the sidebar completely off-screen to the left */
+  .side-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 90;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+    transform: translateX(-100%); /* Off-screen state */
+  }
+
+  /* ----------------------------------------------------------------------
+       THE CSS MAGIC: Toggle styles when the hidden checkbox is :checked
+       ---------------------------------------------------------------------- */
+
+  /* 1. Slide the Sidebar into view */
+  .menu-checkbox:checked ~ .main-wrapper .side-menu {
+    transform: translateX(0);
+  }
+
+  /* 2. Transform Hamburger into an "X" close button */
+  .menu-checkbox:checked ~ .top-nav .hamburger-btn span:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+  }
+
+  .menu-checkbox:checked ~ .top-nav .hamburger-btn span:nth-child(2) {
+    opacity: 0; /* Hide middle bar */
+  }
+
+  .menu-checkbox:checked ~ .top-nav .hamburger-btn span:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+  }
+}
