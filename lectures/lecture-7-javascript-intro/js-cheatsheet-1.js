@@ -34,6 +34,7 @@ let stringPrimitive = "Hello, JS!"; // String
 let booleanPrimitive = true; // Boolean (true or false)
 let undefinedPrimitive; // Undefined (variable declared but not assigned)
 let nullPrimitive = null; // Null (intentional absence of value)
+let naNPrimitive = 0 / 0; // NaN (Not a Number)
 let symbolPrimitive = Symbol("uniqueId"); // Symbol (unique identifier)
 let bigIntPrimitive = 9007199254740991n; // BigInt (integers beyond Number limits)
 
@@ -46,6 +47,22 @@ let objectType = {
 };
 
 let arrayType = ["HTML", "CSS", "JS"]; // Array (special type of Object)
+
+// ==========================================
+// CONSOLE VERIFICATION OUTPUT
+// ==========================================
+console.log("\n--- Primitive Types Output ---");
+console.log("Number:", numberPrimitive, "| Type:", typeof numberPrimitive);
+console.log("String:", stringPrimitive, "| Type:", typeof stringPrimitive);
+console.log("Boolean:", booleanPrimitive, "| Type:", typeof booleanPrimitive);
+console.log(
+  "Undefined:",
+  undefinedPrimitive,
+  "| Type:",
+  typeof undefinedPrimitive,
+);
+console.log("Null:", nullPrimitive, "| Type:", typeof nullPrimitive); // Note: returns 'object' due to legacy JS behavior
+console.log("NaN:", naNPrimitive, "| Type: ", typeof naNPrimitive);
 
 // ==========================================
 // 3. OPERATORS
@@ -67,6 +84,10 @@ let isEqualLoose = 5 == "5"; // Strict vs Loose equality (true: converts types)
 let isEqualStrict = 5 === "5"; // Strict equality (false: checks value AND type)
 let isGreater = 10 > 5; // Greater than: true
 
+console.log("\n--- Comparison Output ---");
+console.log("5 == '5':", isEqualLoose);
+console.log("5 === '5':", isEqualStrict);
+
 // --- Logical Operators ---
 let hasAccess = true;
 let isAdmin = false;
@@ -78,6 +99,8 @@ let deniedAuth = !hasAccess; // Logical NOT (inverts boolean): false
 // --- Ternary Operator (Conditional Operator) ---
 let userAge = 20;
 let canVote = userAge >= 18 ? "Eligible to vote" : "Too young to vote";
+
+console.log("Ternary Result:", canVote);
 
 // ==========================================
 // 4. JAVASCRIPT CONDITIONAL STATEMENTS
@@ -111,23 +134,3 @@ switch (userRole) {
     console.log("Access Denied: Invalid role.");
     break;
 }
-
-// ==========================================
-// CONSOLE VERIFICATION OUTPUT
-// ==========================================
-console.log("\n--- Primitive Types Output ---");
-console.log("Number:", numberPrimitive, "| Type:", typeof numberPrimitive);
-console.log("String:", stringPrimitive, "| Type:", typeof stringPrimitive);
-console.log("Boolean:", booleanPrimitive, "| Type:", typeof booleanPrimitive);
-console.log(
-  "Undefined:",
-  undefinedPrimitive,
-  "| Type:",
-  typeof undefinedPrimitive,
-);
-console.log("Null:", nullPrimitive, "| Type:", typeof nullPrimitive); // Note: returns 'object' due to legacy JS behavior
-
-console.log("\n--- Comparison Output ---");
-console.log("5 == '5':", isEqualLoose);
-console.log("5 === '5':", isEqualStrict);
-console.log("Ternary Result:", canVote);
