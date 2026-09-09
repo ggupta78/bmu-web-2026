@@ -16,12 +16,14 @@
 // ==========================================
 
 // Function Declaration (Hoisted: Can be called before it's defined in code)
+console.log("--- Basic Operations ---");
+console.log("Add:", add(5, 3)); // 8
+
 function add(a, b) {
   return a + b;
 }
 
-console.log("--- Basic Operations ---");
-console.log("Add:", add(5, 3)); // 8
+console.log("Add:", add(4, 5)); // 9
 
 // Function Expression (Not Hoisted: Stored in a variable)
 const subtract = function (a, b) {
