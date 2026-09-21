@@ -18,10 +18,15 @@
 let variableStatement = "This is a statement."; // Declaration & assignment statement
 const MAX_VALUE = 100; // Constant declaration keyword
 
-function demonstrateKeywords() {
-  var globalScopedVariable = "Older ES5 variable keyword";
-  return globalScopedVariable; // 'return' keyword exits a function
+if (true) {
+  var blockVar = "Older ES5 variable keyword";
+  let blockLet = "scoped let";
+  const blockConst = "scoped const";
 }
+
+console.log("block var: " + blockVar);
+// console.log("block let: " + blockLet);
+// console.log("block const: " + blockConst);
 
 // ==========================================
 // 2. DATA TYPES & PRIMITIVE TYPES
@@ -35,12 +40,11 @@ let booleanPrimitive = true; // Boolean (true or false)
 let undefinedPrimitive; // Undefined (variable declared but not assigned)
 let nullPrimitive = null; // Null (intentional absence of value)
 let naNPrimitive = 0 / 0; // NaN (Not a Number)
-let symbolPrimitive = Symbol("uniqueId"); // Symbol (unique identifier)
 let bigIntPrimitive = 9007199254740991n; // BigInt (integers beyond Number limits)
 
 // --- Non-Primitive / Reference Type ---
 let objectType = {
-  // Object
+  // Object (objects in JS can exist without classes)
   name: "JavaScript",
   yearCreated: 1995,
   isAwesome: true,
@@ -63,6 +67,7 @@ console.log(
 );
 console.log("Null:", nullPrimitive, "| Type:", typeof nullPrimitive); // Note: returns 'object' due to legacy JS behavior
 console.log("NaN:", naNPrimitive, "| Type: ", typeof naNPrimitive);
+console.log("BigInt:", bigIntPrimitive, "| Type: ", typeof bigIntPrimitive);
 
 // ==========================================
 // 3. OPERATORS
