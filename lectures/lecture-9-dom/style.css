@@ -1,0 +1,24 @@
+.custom-link {
+  color: #ea9f1e; /* Change to your preferred brand color */
+  text-decoration: none; /* Removes the default underline */
+  font-weight: 600;
+  transition: color 0.2s ease-in-out; /* Smooth hover transition */
+}
+
+.custom-link:hover {
+  color: #077a0f; /* Darker shade on hover */
+  text-decoration: underline; /* Adds underline back on hover */
+  cursor: pointer; /* Ensures the hand cursor shows up */
+}
+
+.custom-link:active {
+  color: #ff0000; /* Brief flash of color on click */
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: inline;
+}

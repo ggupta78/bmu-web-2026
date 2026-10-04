@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic element creation and manipulation</title>
+  </head>
+  <body>
+    <h1>Dynamic element creation and manipulation</h1>
+
+    <ul id="my-list">
+      <li>Existing Item 1</li>
+      <li>Existing Item 2</li>
+    </ul>
+
+    <script>
+      // 1. Create a simple list item
+      const newLi = document.createElement("li");
+      newLi.textContent = "Newly Created List Item";
+
+      // 2. Create another list item with classes or attributes
+      const customLi = document.createElement("li");
+      customLi.style.color = "red";
+      customLi.id = "special-item";
+      customLi.textContent = "Special List Item";
+
+      // Note: These elements exist in memory and are ready to be inserted into the DOM.
+
+      const ul = document.querySelector("#my-list");
+
+      // Append single <li> or multiple <li>'s to the end
+      ul.append(newLi, customLi);
+
+      // Prepending to the Top
+      const firstLi = document.createElement("li");
+      firstLi.textContent = "Top Item (Inserted First)";
+
+      // Adds directly to the top of #my-list
+      ul.prepend(firstLi);
+
+      // Relative Positioning
+      const secondItem = ul.querySelectorAll("li")[1]; // Selects 2nd <li>
+
+      const middleLi = document.createElement("li");
+      middleLi.textContent = "Inserted Right After Item 2";
+
+      // Place immediately after the target <li>
+      secondItem.insertAdjacentElement("afterend", middleLi);
+
+      // Removing li elements
+      // Target the first <li> and remove it
+      const itemToRemove = document.querySelector("#my-list li:first-child");
+
+      itemToRemove.remove();
+
+      // Removing last li from parent
+      const lastLi = ul.querySelector("li:last-child");
+
+      // Remove the last <li> using removeChild
+      if (lastLi) {
+        ul.removeChild(lastLi);
+      }
+
+      // Removing all li elements
+      // Removes all <li> children instantly
+      ul.textContent = "";
+    </script>
+  </body>
+</html>
