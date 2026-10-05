@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Events with this keyword and event object</title>
+  </head>
+  <body>
+    <h2>Inline 'this'</h2>
+    <!-- 'this' refers directly to the <button> element -->
+    <button onclick="console.log(this)">Click Me</button>
+
+    <!-- If calling a global function, pass 'this' as an argument -->
+    <button onclick="handleClick(this)">Click Me</button>
+
+    <script>
+      function handleClick(element) {
+        console.log(element); // Logs the button element
+      }
+    </script>
+
+    <h2>'this' with Traditional function</h2>
+    <button id="btnTraditional">Traditional Btn</button>
+
+    <h2>'this' with Arrow function</h2>
+    <button id="btnArrow">Arrow Btn</button>
+
+    <ul>
+      <li>List Item 1</li>
+      <li>List Item 2</li>
+      <li>List Item 3</li>
+    </ul>
+
+    <script src="events-this.js"></script>
+  </body>
+</html>
