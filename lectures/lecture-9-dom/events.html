@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Event Handling Methods</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      .card {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+      }
+      button {
+        padding: 8px 16px;
+        cursor: pointer;
+      }
+      #log {
+        background: #f4f4f4;
+        padding: 10px;
+        border-left: 4px solid #333;
+        min-height: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>DOM Event Handling Methods</h1>
+
+    <!-- Method 1: Inline Event Handler -->
+    <div class="card">
+      <h3>1. Inline Event Handler</h3>
+      <p>Written directly inside the HTML tag.</p>
+      <button onclick="logMessage('Triggered by: Inline onclick attribute')">
+        Click Me (Inline)
+      </button>
+    </div>
+
+    <!-- Method 2: DOM Element Property (Function Assignment) -->
+    <div class="card">
+      <h3>2. DOM Property Handler</h3>
+      <p>
+        Assigned via JavaScript property (e.g.,
+        <code>element.onclick = function</code>).
+      </p>
+      <button id="propertyBtn">Click Me (Property Handler)</button>
+    </div>
+
+    <!-- Method 3: addEventListener() -->
+    <div class="card">
+      <h3>3. addEventListener Method (Modern Standard)</h3>
+      <p>
+        Attached via JavaScript method. Allows multiple listeners on the same
+        event.
+      </p>
+      <button id="listenerBtn">Click Me (addEventListener)</button>
+    </div>
+
+    <h3>Output Log:</h3>
+    <div id="log">Click any button above to see the output...</div>
+
+    <!-- Linking external JavaScript file -->
+    <script src="events.js"></script>
+  </body>
+</html>
