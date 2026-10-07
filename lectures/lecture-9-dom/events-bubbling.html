@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Event Lifecycle: Capturing & Bubbling</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        background-color: #f4f6f8;
+        color: #333;
+        padding: 30px 20px;
+        line-height: 1.5;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+        color: #1a1f36;
+      }
+
+      p.subtitle {
+        color: #697386;
+        margin-bottom: 24px;
+      }
+
+      .demo-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      @media (max-width: 850px) {
+        .demo-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e3e8ee;
+      }
+
+      .card h2 {
+        font-size: 1.05rem;
+        margin-bottom: 12px;
+        color: #3c4257;
+      }
+
+      /* Nested Box Styles */
+      .parent-box {
+        background-color: #e3f2fd;
+        border: 2px dashed #2196f3;
+        border-radius: 8px;
+        padding: 24px 12px;
+        text-align: center;
+        transition: background-color 0.2s ease;
+      }
+
+      .parent-box p {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: #1565c0;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .child-btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 14px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        border-radius: 6px;
+        cursor: pointer;
+        transition:
+          background-color 0.15s ease,
+          transform 0.1s ease;
+      }
+
+      .child-btn:hover {
+        background-color: #0056b3;
+      }
+      .child-btn:active {
+        transform: scale(0.98);
+      }
+
+      .child-btn.stop {
+        background-color: #dc3545;
+      }
+      .child-btn.stop:hover {
+        background-color: #a71d2a;
+      }
+
+      .child-btn.capture {
+        background-color: #6f42c1;
+      }
+      .child-btn.capture:hover {
+        background-color: #563d7c;
+      }
+
+      /* Console Logger Section */
+      .console-card {
+        background: #1e1e2e;
+        border-radius: 12px;
+        padding: 16px 20px;
+        color: #a6adc8;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .console-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+        border-bottom: 1px solid #313244;
+        padding-bottom: 8px;
+      }
+
+      .console-header h3 {
+        font-size: 0.9rem;
+        color: #cdd6f4;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .clear-btn {
+        background: transparent;
+        border: 1px solid #45475a;
+        color: #a6adc8;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        cursor: pointer;
+      }
+
+      .clear-btn:hover {
+        background: #313244;
+        color: #cdd6f4;
+      }
+
+      #logOutput {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 0.88rem;
+        height: 180px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .log-entry {
+        padding: 5px 10px;
+        border-radius: 4px;
+        animation: fadeIn 0.15s ease-in;
+      }
+
+      .log-child {
+        background-color: rgba(0, 123, 255, 0.2);
+        color: #89b4fa;
+        border-left: 3px solid #89b4fa;
+      }
+
+      .log-parent-bubble {
+        background-color: rgba(255, 193, 7, 0.2);
+        color: #f9e2af;
+        border-left: 3px solid #f9e2af;
+      }
+
+      .log-parent-capture {
+        background-color: rgba(111, 66, 193, 0.25);
+        color: #cba6f7;
+        border-left: 3px solid #cba6f7;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-3px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>DOM Event Propagation Phases</h1>
+      <p class="subtitle">
+        Compare standard bubbling (bottom-up), stopPropagation, and event
+        capturing (top-down).
+      </p>
+
+      <div class="demo-grid">
+        <!-- 1. Standard Bubbling -->
+        <div class="card">
+          <h2>1. Standard Bubbling</h2>
+          <div class="parent-box" id="parent1">
+            <p>Parent DIV</p>
+            <button class="child-btn" id="child1">Click Me</button>
+          </div>
+        </div>
+
+        <!-- 2. Stopped Bubbling -->
+        <div class="card">
+          <h2>2. With stopPropagation()</h2>
+          <div class="parent-box" id="parent2">
+            <p>Parent DIV</p>
+            <button class="child-btn stop" id="child2">Click Me</button>
+          </div>
+        </div>
+
+        <!-- 3. Event Capturing Phase -->
+        <div class="card">
+          <h2>3. Event Capturing Phase</h2>
+          <div class="parent-box" id="parent3">
+            <p>Parent DIV</p>
+            <button class="child-btn capture" id="child3">Click Me</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Output Logger -->
+      <div class="console-card">
+        <div class="console-header">
+          <h3>Live Event Propagation Log</h3>
+          <button class="clear-btn" id="clearLog">Clear Console</button>
+        </div>
+        <div id="logOutput"></div>
+      </div>
+    </div>
+
+    <script>
+      const logOutput = document.querySelector("#logOutput");
+      const clearLogBtn = document.querySelector("#clearLog");
+
+      function logMessage(text, type) {
+        const entry = document.createElement("div");
+        entry.className = `log-entry log-${type}`;
+        entry.textContent = `> ${text}`;
+        logOutput.appendChild(entry);
+        logOutput.scrollTop = logOutput.scrollHeight;
+      }
+
+      clearLogBtn.addEventListener("click", () => {
+        logOutput.innerHTML = "";
+      });
+
+      // -------------------------------------------------------------
+      // DEMO 1: Standard Event Bubbling (Default: Bottom-Up)
+      // -------------------------------------------------------------
+      const parent1 = document.querySelector("#parent1");
+      const child1 = document.querySelector("#child1");
+
+      parent1.addEventListener("click", () => {
+        logMessage(
+          "[BUBBLING] 2. Parent DIV handler executed (Bottom-Up)",
+          "parent-bubble",
+        );
+      });
+
+      child1.addEventListener("click", () => {
+        logMessage("[TARGET] 1. Child BUTTON clicked", "child");
+      });
+
+      // -------------------------------------------------------------
+      // DEMO 2: Stopped Event Bubbling
+      // -------------------------------------------------------------
+      const parent2 = document.querySelector("#parent2");
+      const child2 = document.querySelector("#child2");
+
+      parent2.addEventListener("click", () => {
+        logMessage("[BUBBLING] Parent DIV handler executed", "parent-bubble");
+      });
+
+      child2.addEventListener("click", (event) => {
+        event.stopPropagation();
+        logMessage(
+          "[TARGET] Child BUTTON clicked (Propagation Stopped!)",
+          "child",
+        );
+      });
+
+      // -------------------------------------------------------------
+      // DEMO 3: Event Capturing Phase (Top-Down)
+      // -------------------------------------------------------------
+      const parent3 = document.querySelector("#parent3");
+      const child3 = document.querySelector("#child3");
+
+      // Passing { capture: true } (or `true` as 3rd parameter) enables capturing phase
+      parent3.addEventListener(
+        "click",
+        () => {
+          logMessage(
+            "[CAPTURING] 1. Parent DIV handler executed FIRST (Top-Down)",
+            "parent-capture",
+          );
+        },
+        { capture: true },
+      );
+
+      child3.addEventListener("click", () => {
+        logMessage("[TARGET] 2. Child BUTTON clicked SECOND", "child");
+      });
+    </script>
+  </body>
+</html>
