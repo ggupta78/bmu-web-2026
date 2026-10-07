@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Delegation Demo</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        background-color: #f4f6f8;
+        color: #333;
+        padding: 40px 20px;
+        line-height: 1.5;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+        margin-bottom: 6px;
+        color: #1a1f36;
+      }
+
+      p.subtitle {
+        color: #697386;
+        margin-bottom: 24px;
+      }
+
+      .app-card {
+        background: white;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e3e8ee;
+        margin-bottom: 24px;
+      }
+
+      /* Input Form Styles */
+      .input-group {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .input-group input {
+        flex: 1;
+        padding: 10px 14px;
+        border: 1px solid #dcdfe6;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .input-group input:focus {
+        border-color: #007bff;
+      }
+
+      .btn-add {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        font-weight: 600;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.15s;
+      }
+
+      .btn-add:hover {
+        background-color: #218838;
+      }
+
+      /* List Container & Items */
+      .list-header {
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #697386;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      ul.shopping-list {
+        list-style: none;
+        border: 2px dashed #a0aec0;
+        border-radius: 8px;
+        padding: 12px;
+        background-color: #f8fafc;
+        min-height: 120px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      ul.shopping-list li {
+        background: white;
+        border: 1px solid #e2e8f0;
+        padding: 10px 14px;
+        border-radius: 6px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition:
+          transform 0.1s,
+          box-shadow 0.1s;
+        animation: slideIn 0.2s ease-out;
+      }
+
+      ul.shopping-list li:hover {
+        border-color: #cbd5e1;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+      }
+
+      .item-text {
+        font-weight: 500;
+        color: #2d3748;
+      }
+
+      .btn-delete {
+        background-color: #fee2e2;
+        color: #dc2626;
+        border: 1px solid #fca5a5;
+        padding: 6px 12px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        border-radius: 4px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        transition: all 0.15s;
+      }
+
+      .btn-delete:hover {
+        background-color: #dc2626;
+        color: white;
+      }
+
+      /* Console Logger Section */
+      .console-card {
+        background: #1e1e2e;
+        border-radius: 12px;
+        padding: 16px 20px;
+        color: #a6adc8;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .console-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+        border-bottom: 1px solid #313244;
+        padding-bottom: 8px;
+      }
+
+      .console-header h3 {
+        font-size: 0.88rem;
+        color: #cdd6f4;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .clear-btn {
+        background: transparent;
+        border: 1px solid #45475a;
+        color: #a6adc8;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        cursor: pointer;
+      }
+
+      .clear-btn:hover {
+        background: #313244;
+        color: #cdd6f4;
+      }
+
+      #logOutput {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 0.85rem;
+        height: 160px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .log-entry {
+        padding: 6px 10px;
+        border-radius: 4px;
+        animation: fadeIn 0.15s ease-in;
+      }
+
+      .log-delete {
+        background-color: rgba(243, 139, 168, 0.2);
+        color: #f38ba8;
+        border-left: 3px solid #f38ba8;
+      }
+
+      .log-info {
+        background-color: rgba(137, 180, 250, 0.2);
+        color: #89b4fa;
+        border-left: 3px solid #89b4fa;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-3px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Event Delegation Pattern</h1>
+      <p class="subtitle">
+        A single click listener on the parent &lt;ul&gt; handles clicks for all
+        existing and dynamically added items.
+      </p>
+
+      <div class="app-card">
+        <!-- Input for Adding New Dynamic Items -->
+        <form id="itemForm" class="input-group">
+          <input
+            type="text"
+            id="itemInput"
+            placeholder="Add a new item..."
+            required
+          />
+          <button type="submit" class="btn-add">+ Add Item</button>
+        </form>
+
+        <div class="list-header">
+          <span>Shopping List (Parent Listener Container)</span>
+          <span>Action</span>
+        </div>
+
+        <!-- Single Listener attached here -->
+        <ul class="shopping-list" id="shoppingList">
+          <li>
+            <span class="item-text">Apples</span>
+            <button class="btn-delete" data-action="delete">🗑️ Delete</button>
+          </li>
+          <li>
+            <span class="item-text">Bananas</span>
+            <button class="btn-delete" data-action="delete">🗑️ Delete</button>
+          </li>
+          <li>
+            <span class="item-text">Oranges</span>
+            <button class="btn-delete" data-action="delete">🗑️ Delete</button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Output Console Logger -->
+      <div class="console-card">
+        <div class="console-header">
+          <h3>Live Delegation Log</h3>
+          <button class="clear-btn" id="clearLog">Clear Console</button>
+        </div>
+        <div id="logOutput"></div>
+      </div>
+    </div>
+
+    <script>
+      const shoppingList = document.querySelector("#shoppingList");
+      const itemForm = document.querySelector("#itemForm");
+      const itemInput = document.querySelector("#itemInput");
+      const logOutput = document.querySelector("#logOutput");
+      const clearLogBtn = document.querySelector("#clearLog");
+
+      function logMessage(text, type) {
+        const entry = document.createElement("div");
+        entry.className = `log-entry log-${type}`;
+        entry.textContent = text;
+        logOutput.appendChild(entry);
+        logOutput.scrollTop = logOutput.scrollHeight;
+      }
+
+      clearLogBtn.addEventListener("click", () => {
+        logOutput.innerHTML = "";
+      });
+
+      // =========================================================================
+      // EVENT DELEGATION: Attached to the parent <ul> once
+      // =========================================================================
+      shoppingList.addEventListener("click", (event) => {
+        // Find if a delete button (or element inside it) was clicked
+        const deleteBtn = event.target.closest(".btn-delete");
+
+        if (deleteBtn) {
+          const listItem = deleteBtn.closest("li");
+          const itemName = listItem.querySelector(".item-text").textContent;
+
+          logMessage(`[DELEGATION] Removed "${itemName}"`, "delete");
+          logMessage(
+            `  └─ event.target: <${event.target.tagName.toLowerCase()}> | event.currentTarget: <UL>`,
+            "info",
+          );
+
+          listItem.remove();
+        }
+      });
+
+      // =========================================================================
+      // Dynamic Item Addition: Works automatically without new event listeners
+      // =========================================================================
+      itemForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const value = itemInput.value.trim();
+
+        if (value) {
+          const newLi = document.createElement("li");
+          newLi.innerHTML = `
+          <span class="item-text">${value}</span>
+          <button class="btn-delete" data-action="delete">🗑️ Delete</button>
+        `;
+          shoppingList.appendChild(newLi);
+
+          logMessage(
+            `[SYSTEM] Added new item "${value}" to DOM (no listener attached)`,
+            "info",
+          );
+          itemInput.value = "";
+        }
+      });
+    </script>
+  </body>
+</html>
