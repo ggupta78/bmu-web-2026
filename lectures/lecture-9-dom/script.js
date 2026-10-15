@@ -25,11 +25,11 @@ console.log(userInputsNew[0]);
 const h1 = document.querySelector("#main-heading");
 
 // 1. Setting safe text (HTML tags are treated as literal text)
-h1.textContent = "Hello <strong>World</strong>!";
+h1.textContent = "Hello <i>World</i>!";
 // Output on page: Hello <strong>World</strong>!
 
 // 2. Rendering rich HTML markup
-h1.innerHTML = "Hello <strong>World</strong>!";
+h1.innerHTML = "Hello <i>World</i>!";
 // Output on page: Hello World! (with bold "World")
 
 // 3. Content reset
