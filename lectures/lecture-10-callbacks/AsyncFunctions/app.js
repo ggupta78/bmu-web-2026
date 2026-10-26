@@ -76,6 +76,8 @@ async function printRainbow() {
 
 printRainbow();
 
+console.log("after printRainbow()");
+
 // Using async and await with response data
 const fakeRequest = (url) => {
   return new Promise((resolve, reject) => {
