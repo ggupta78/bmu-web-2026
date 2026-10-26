@@ -17,7 +17,8 @@ function logMessage(text) {
 const propertyBtn = document.querySelector("#propertyBtn");
 
 // Assigning a function directly to the element's onclick property
-propertyBtn.onclick = function () {
+propertyBtn.onclick = function (event) {
+  console.log(event);
   logMessage("Triggered by: element.onclick property handler");
 };
 
