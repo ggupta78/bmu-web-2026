@@ -4,6 +4,7 @@ function processUser(name, callback) {
   callback(name);
 }
 
+//callback function
 const logGVar = function logGreeting(user) {
   console.log(`Hello, ${user}!`);
 };

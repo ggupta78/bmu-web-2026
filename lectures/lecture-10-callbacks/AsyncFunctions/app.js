@@ -98,6 +98,8 @@ async function makeTwoRequests() {
     console.log(data1);
     let data2 = await fakeRequest("/page2");
     console.log(data2);
+    let data3 = await fakeRequest("/page3");
+    console.log(data3);
   } catch (e) {
     console.log("CAUGHT AN ERROR!");
     console.log("error is:", e);
