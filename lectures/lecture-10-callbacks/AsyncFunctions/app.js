@@ -44,13 +44,13 @@ const delayedColorChange = (color, delay) => {
   });
 };
 
-// delayedColorChange('red', 1000)
-//     .then(() => delayedColorChange('orange', 1000))
-//     .then(() => delayedColorChange('yellow', 1000))
-//     .then(() => delayedColorChange('green', 1000))
-//     .then(() => delayedColorChange('blue', 1000))
-//     .then(() => delayedColorChange('indigo', 1000))
-//     .then(() => delayedColorChange('violet', 1000))
+delayedColorChange("red", 1000)
+  .then(() => delayedColorChange("orange", 1000))
+  .then(() => delayedColorChange("yellow", 1000))
+  .then(() => delayedColorChange("green", 1000))
+  .then(() => delayedColorChange("blue", 1000))
+  .then(() => delayedColorChange("indigo", 1000))
+  .then(() => delayedColorChange("violet", 1000));
 
 async function rainbow() {
   await delayedColorChange("red", 1000);
@@ -101,5 +101,7 @@ async function makeTwoRequests() {
   } catch (e) {
     console.log("CAUGHT AN ERROR!");
     console.log("error is:", e);
+  } finally {
+    console.log("finally");
   }
 }

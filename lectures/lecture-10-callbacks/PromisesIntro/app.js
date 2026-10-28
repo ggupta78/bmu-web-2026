@@ -1,51 +1,7 @@
-// THE CALLBACK VERSION
-const fakeRequestCallback = (url, success, failure) => {
-  const delay = Math.floor(Math.random() * 4500) + 500;
-  setTimeout(() => {
-    if (delay > 4000) {
-      failure("Connection Timeout :(");
-    } else {
-      success(`Here is your fake data from ${url}`);
-    }
-  }, delay);
-};
-
-// fakeRequestCallback example
-
-// fakeRequestCallback(
-//   "books.com/page1",
-//   function (response) {
-//     console.log("IT WORKED!!!!");
-//     console.log(response);
-//     fakeRequestCallback(
-//       "books.com/page2",
-//       function (response) {
-//         console.log("IT WORKED AGAIN!!!!");
-//         console.log(response);
-//         fakeRequestCallback(
-//           "books.com/page3",
-//           function (response) {
-//             console.log("IT WORKED AGAIN (3rd req)!!!!");
-//             console.log(response);
-//           },
-//           function (err) {
-//             console.log("ERROR (3rd req)!!!", err);
-//           },
-//         );
-//       },
-//       function (err) {
-//         console.log("ERROR (2nd req)!!!", err);
-//       },
-//     );
-//   },
-//   function (err) {
-//     console.log("ERROR!!!", err);
-//   },
-// );
-
+// 1. Promise with 1 level
 // ------------------------------------------------------------
 
-// THE PROMISE VERSION
+// Creation of the Promise
 const fakeRequestPromise = (url) => {
   return new Promise((resolve, reject) => {
     const delay = Math.floor(Math.random() * 4500) + 500;
@@ -61,27 +17,42 @@ const fakeRequestPromise = (url) => {
 
 fakeRequestPromise("yelp.com/api/coffee/page1")
   .then((data) => {
-    console.log("IT WORKED!!!!!! (page1)", data);
-    fakeRequestPromise("yelp.com/api/coffee/page2")
-      .then((data) => {
-        console.log("IT WORKED!!!!!! (page2)", data);
-        fakeRequestPromise("yelp.com/api/coffee/page3")
-          .then((data) => {
-            console.log("IT WORKED!!!!!! (page3)", data);
-          })
-          .catch((data) => {
-            console.log("OH NO, ERROR!!! (page3)", data);
-          });
-      })
-      .catch((data) => {
-        console.log("OH NO, ERROR!!! (page2)", data);
-      });
+    console.log("IT WORKED!!!!!! (page1)");
+    console.log(data);
   })
-  .catch((data) => {
-    console.log("OH NO, ERROR!!! (page1)", data);
+  .catch((err) => {
+    console.log("OH NO, A REQUEST FAILED!!!");
+    console.log(err);
+  })
+  .finally(() => {
+    console.log("Executing promise - finally...");
   });
 
-// THE CLEANEST OPTION WITH THEN/CATCH
+// 2. THE NESTED PROMISE VERSION
+
+// fakeRequestPromise("yelp.com/api/coffee/page1")
+//   .then((data) => {
+//     console.log("IT WORKED!!!!!! (page1)", data);
+//     fakeRequestPromise("yelp.com/api/coffee/page2")
+//       .then((data) => {
+//         console.log("IT WORKED!!!!!! (page2)", data);
+//         fakeRequestPromise("yelp.com/api/coffee/page3")
+//           .then((data) => {
+//             console.log("IT WORKED!!!!!! (page3)", data);
+//           })
+//           .catch((data) => {
+//             console.log("OH NO, ERROR!!! (page3)", data);
+//           });
+//       })
+//       .catch((data) => {
+//         console.log("OH NO, ERROR!!! (page2)", data);
+//       });
+//   })
+//   .catch((data) => {
+//     console.log("OH NO, ERROR!!! (page1)", data);
+//   });
+
+// 3. THE CLEANEST OPTION WITH THEN/CATCH
 // RETURN A PROMISE FROM .THEN() CALLBACK SO WE CAN CHAIN!
 // fakeRequestPromise("yelp.com/api/coffee/page1")
 //   .then((data) => {
@@ -105,3 +76,31 @@ fakeRequestPromise("yelp.com/api/coffee/page1")
 //   .finally(() => {
 //     console.log("Executing promise - finally...");
 //   });
+
+// 4. Promise without .then and .catch
+// const resolveCallback = (msg) => {
+//   console.log(msg);
+// };
+
+// const rejectCallback = (msg) => {
+//   console.log(msg);
+// };
+
+// const simplePromise = new Promise((resolve, reject) => {
+//   const delay = Math.floor(Math.random() * 4500) + 500;
+//   setTimeout(() => {
+//     if (delay > 4000) {
+//       //Instead of callback need a proper function
+//       rejectCallback("simplePromise Connection Timeout :(");
+//       //Need to resolve or reject the promise inorder to complete it
+//       reject(null);
+//     } else {
+//       //Instead of callback need a proper function
+//       resolveCallback(`simplePromise Succeeded!`);
+//       //Need to resolve or reject the promise inorder to complete it
+//       resolve(null);
+//     }
+//   }, delay);
+// });
+
+// console.log(simplePromise);

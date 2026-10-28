@@ -4,12 +4,12 @@ function processUser(name, callback) {
   callback(name);
 }
 
-function logGreeting(user) {
+const logGVar = function logGreeting(user) {
   console.log(`Hello, ${user}!`);
-}
+};
 
 // Passing logGreeting as a callback
-processUser("Alice", logGreeting);
+processUser("Alice", logGVar);
 
 // 1.1 Built-in Callbacks
 const numbers = [1, 2, 3, 4];
@@ -25,8 +25,10 @@ console.log(numbers.map(squared));
 
 console.log("Sending request to server!");
 
-setTimeout(() => {
+const asyncCallback = () => {
   console.log("Here is your data from the server...");
-}, 3000);
+};
+
+setTimeout(asyncCallback, 3000);
 
 console.log("I AM AT THE END OF THE FILE!");
